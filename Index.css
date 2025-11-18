@@ -1,0 +1,490 @@
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600&family=Srisakdi:wght@700&display=swap');
+:root {
+--primary-color: #bfa05b;
+--secondary-color: #2c3e50;
+--bg-color: #f9f9f9;
+--text-color: #333;
+--card-bg: #ffffff;
+}
+body {
+font-family: 'Prompt', sans-serif;
+margin: 0;
+padding: 0;
+background-color: var(--bg-color);
+color: var(--text-color);
+overflow-x: hidden;
+}
+/* --- Header Styling --- */
+header {
+background: linear-gradient(135deg, var(--secondary-color), #1a252f);
+color: white;
+padding: 40px 20px;
+text-align: center;
+box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+/* --- หัวข้อหลัก: ใช้ฟอนต์ลายไทย Srisakdi --- */
+header h1 {
+margin: 0;
+font-size: 2.5rem;
+font-family: 'Srisakdi', cursive;
+font-weight: 700;
+text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+header p {
+font-weight: 300;
+font-size: 1.1rem;
+margin-top: 10px;
+color: var(--primary-color);
+}
+/* --- Container --- */
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 40px 20px;
+}
+/* --- Navigation / Back Button --- */
+.nav-bar {
+margin-bottom: 20px;
+}
+.btn-back {
+display: inline-block;
+text-decoration: none;
+background-color: var(--secondary-color);
+color: white;
+padding: 10px 20px;
+border-radius: 30px;
+transition: all 0.3s ease;
+}
+.btn-back:hover {
+background-color: var(--primary-color);
+transform: translateX(-5px);
+}
+/* --- Region Selector (Index Page) --- */
+.region-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 30px;
+}
+/* --- การ์ดภาค: Glassmorphism Effect และ Hover Image Zoom --- */
+.region-card {
+background: rgba(255, 255, 255, 0.9);
+backdrop-filter: blur(10px);
+-webkit-backdrop-filter: blur(10px);
+border: 1px solid rgba(255, 255, 255, 0.5);
+border-radius: 15px;
+overflow: hidden;
+box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+text-align: center;
+cursor: pointer;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+text-decoration: none;
+color: var(--text-color);
+display: block;
+}
+.region-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+}
+.region-img {
+height: 200px;
+width: 100%;
+object-fit: cover;
+background-color: #ddd;
+transition: transform 0.5s ease;
+}
+/* เมื่อชี้ที่การ์ด ให้รูปภาพข้างในขยายตัว */
+.region-card:hover .region-img {
+transform: scale(1.1);
+}
+.region-info {
+padding: 20px;
+}
+.region-info h2 {
+color: var(--secondary-color);
+margin-bottom: 10px;
+}
+/* --- Temple List (Region Pages) --- */
+.temple-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+gap: 25px;
+}
+.temple-card {
+background: white;
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+transition: transform 0.3s ease;
+display: flex;
+flex-direction: column;
+}
+.temple-card:hover {
+transform: translateY(-5px);
+}
+.temple-img {
+width: 100%;
+height: 200px;
+object-fit: cover;
+}
+.temple-info {
+padding: 15px;
+flex-grow: 1;
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+}
+.temple-name {
+font-size: 1.2rem;
+font-weight: 600;
+color: var(--secondary-color);
+margin-bottom: 5px;
+}
+/* --- การตัดคำ 2 บรรทัด --- */
+.temple-desc {
+font-size: 0.9rem;
+color: #666;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+line-clamp: 2;
+-webkit-box-orient: vertical;
+overflow: hidden;
+margin-bottom: 10px;
+}
+/* --- ปุ่มดูรายละเอียด --- */
+.btn-detail {
+display: block;
+width: 100%;
+padding: 10px;
+margin-top: auto;
+background: transparent;
+border: 1px solid var(--primary-color);
+color: var(--primary-color);
+border-radius: 8px;
+cursor: pointer;
+font-family: 'Prompt', sans-serif;
+transition: 0.3s;
+font-weight: 600;
+}
+.btn-detail:hover {
+background: var(--primary-color);
+color: white;
+}
+/* --- Animations --- */
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(20px); }
+to { opacity: 1; transform: translateY(0); }
+}
+.animate-up {
+animation: fadeIn 0.8s ease-out forwards;
+}
+/* =========================================
+ส่วน Popup (Modal) Styles
+========================================= */
+.modal {
+display: none;
+position: fixed;
+z-index: 1000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0,0,0,0.8);
+backdrop-filter: blur(5px);
+}
+.modal-content {
+background-color: #fff;
+margin: 5% auto;
+width: 90%;
+max-width: 600px;
+border-radius: 15px;
+overflow: hidden;
+position: relative;
+animation: fadeIn 0.3s;
+box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.close-btn {
+position: absolute;
+right: 15px;
+top: 10px;
+color: white;
+font-size: 30px;
+font-weight: bold;
+cursor: pointer;
+z-index: 101;
+text-shadow: 0 0 5px black;
+transition: 0.3s;
+}
+.close-btn:hover {
+color: var(--primary-color);
+transform: scale(1.1);
+}
+.modal-img-full {
+width: 100%;
+height: 300px;
+object-fit: cover;
+display: block;
+}
+.modal-body {
+padding: 25px;
+}
+.modal-body h2 {
+color: var(--secondary-color);
+margin-top: 0;
+margin-bottom: 15px;
+border-bottom: 2px solid #eee;
+padding-bottom: 10px;
+}
+.info-badge {
+display: inline-block;
+background: #f0f0f0;
+padding: 5px 12px;
+border-radius: 20px;
+font-size: 0.85rem;
+color: #555;
+margin-right: 5px;
+margin-bottom: 15px;
+border: 1px solid #ddd;
+}
+.btn-map {
+display: block;
+width: 100%;
+text-align: center;
+background-color: #27ae60;
+color: white;
+padding: 12px;
+text-decoration: none;
+border-radius: 8px;
+margin-top: 20px;
+box-sizing: border-box;
+font-weight: bold;
+transition: 0.3s;
+}
+.btn-map:hover {
+background-color: #219150;
+box-shadow: 0 4px 10px rgba(33,145,80,0.3);
+}
+/* =========================================
+ส่วน Footer และ Social Icons
+========================================= */
+footer {
+background-color: transparent;
+color: var(--secondary-color);
+padding: 40px 20px 20px 20px;
+text-align: center;
+margin-top: 40px;
+border-top: 1px solid #e0e0e0;
+}
+.social-box {
+display: flex;
+justify-content: center;
+gap: 30px;
+margin-bottom: 20px;
+}
+.social-icon {
+font-size: 3rem;
+text-decoration: none;
+transition: transform 0.3s ease;
+display: inline-block;
+}
+.social-icon:hover {
+transform: translateY(-5px) scale(1.1);
+}
+.fa-facebook {
+color: #1877F2;
+}
+/* --- Instagram Icon Gradient (ใช้ได้ทั้งหน้าทั่วไป) --- */
+.fa-instagram {
+background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+background-clip: text;
+-webkit-background-clip: text;
+color: transparent;
+-webkit-text-fill-color: transparent;
+display: inline-block;
+}
+.copyright {
+font-size: 0.9rem;
+color: #888;
+font-weight: 300;
+}
+/* =========================================
+ส่วนตกแต่งเฉพาะหน้าหลัก (Home Page)
+========================================= */
+/* 1. ใส่รูปพื้นหลังวัดสวยๆ */
+body.home-page-body {
+background-image: url('https://images.unsplash.com/photo-1528181304800-259b08848526?q=80&w=1920&auto=format&fit=crop');
+background-size: cover;
+background-position: center;
+background-attachment: fixed;
+background-repeat: no-repeat;
+position: relative;
+min-height: 100vh;
+}
+/* 2. สร้างฟิล์มดำจางๆ ทับรูป (Overlay) */
+body.home-page-body::before {
+content: "";
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.4);
+z-index: -1;
+}
+/* 3. ปรับ Header หน้าหลักให้โปร่งแสงนิดหน่อย */
+body.home-page-body header {
+background: rgba(44, 62, 80, 0.85);
+backdrop-filter: blur(5px);
+}
+/* 4. ปรับ Footer ในหน้าหลักให้ดูดีบนพื้นหลังมืด (เพิ่มเงาข้อความ) */
+body.home-page-body footer .copyright {
+color: #fff;
+font-weight: 500;
+text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+margin-top: 10px;
+}
+body.home-page-body footer {
+border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+/* 5. ปรับสีปุ่ม IG ในหน้าหลักให้สว่างขึ้นเพื่อตัดกับพื้นหลัง (Overrides) */
+body.home-page-body .fa-instagram {
+background: linear-gradient(45deg, #ffb3ba, #ffdfba, #ffffba, #baffc9, #bae1ff);
+background-clip: text;
+-webkit-background-clip: text;
+color: transparent;
+-webkit-text-fill-color: transparent;
+}
+.temple-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* ปรับตามขนาดจอ */
+    gap: 20px; /* ระยะห่างระหว่าง Card */
+}
+.temple-card {
+    /* ... CSS เดิม ... */
+    border-radius: 8px;
+    overflow: hidden; /* เพื่อให้รูปภาพไม่ทะลุขอบมน */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s; /* เพิ่ม Animation เล็กน้อย */
+}
+.temple-card:hover {
+    transform: translateY(-5px); /* เมื่อเมาส์ชี้ การ์ดจะยกขึ้นเล็กน้อย */
+}
+.temple-img {
+    width: 100%;
+    height: 200px; /* กำหนดความสูงให้เท่ากัน */
+    object-fit: cover; /* ครอบตัดรูปภาพให้เต็มพื้นที่โดยไม่เสียสัดส่วน */
+}
+.btn-detail {
+    background-color: #A0522D; /* ตัวอย่าง: สีน้ำตาลอ่อน (Sienna) */
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%; /* ทำให้ปุ่มกว้างเต็มพื้นที่ Card */
+    margin-top: 10px;
+}
+@media (max-width: 768px) {
+    .temple-grid {
+        /* บนมือถือให้เหลือเพียง 1 คอลัมน์เต็ม */
+        grid-template-columns: 1fr; 
+    }
+    header h1 {
+        font-size: 2em; /* ลดขนาดตัวอักษรลง */
+    }
+}
+/* =========================================
+ส่วนตกแต่งเฉพาะหน้าย่อย (Region Pages)
+========================================= */
+
+/* โค้ดพื้นฐานสำหรับหน้าย่อย (Region) */
+.region-north, .region-central, .region-northeast, .region-south {
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+    min-height: 100vh;
+    /* การสร้าง Overlay สีดำจาง ๆ ทับรูป */
+}
+
+.region-north::before, .region-central::before, .region-northeast::before, .region-south::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* Overlay จางกว่าหน้าหลักเพื่อให้เนื้อหาเด่น */
+    z-index: -1;
+}
+
+/* --- ภาคเหนือ (ศิลปะล้านนา และขุนเขา) --- */
+.region-north {
+    background-image: url('https://cdn.pixabay.com/photo/2020/07/22/16/26/wat-rong-khun-5429250_1280.jpg');
+}
+
+/* --- ภาคกลาง (ศูนย์รวมอารยธรรม และแม่น้ำเจ้าพระยา) --- */
+.region-central {
+    background-image: url('https://i.pinimg.com/1200x/c3/5b/7a/c35b7a434ab1a8a1ddf7a8c2cf8079d2.jpg');
+}
+
+/* --- ภาคอีสาน (ดินแดนศักดิ์สิทธิ์ แห่งที่ราบสูง) --- */
+.region-northeast {
+    background-image: url('https://i.pinimg.com/1200x/57/f2/8d/57f28d34bbcfa56a3b9bb451ba9b78fb.jpg');
+}
+
+/* --- ภาคใต้ (วัดสวยริมเล และศรัทธาแดนใต้) --- */
+.region-south {
+    background-image: url('https://www.thaitoptour.com/wp-content/uploads/2019/05/chalongtemple.jpg');
+}
+
+/* *****************************************
+*** สิ่งสำคัญ: ปรับ Header/Footer ในหน้าย่อย ***
+***************************************** */
+
+/* ปรับ Header ของหน้าย่อยให้ดูดีบนพื้นหลังรูปภาพ */
+.region-north header, 
+.region-central header, 
+.region-northeast header, 
+.region-south header {
+    /* ลบพื้นหลังสีเข้มทึบออก เพื่อให้มองเห็นรูปพื้นหลัง */
+    background: transparent;
+    padding: 30px 20px;
+    box-shadow: none;
+}
+
+/* ปรับข้อความและเงา Header ของหน้าย่อยให้ชัดเจน */
+.region-north header h1, 
+.region-central header h1, 
+.region-northeast header h1, 
+.region-south header h1 {
+    color: white;
+    font-size: 2.8rem;
+    text-shadow: 0 0 5px #000, 0 0 10px #000;
+}
+
+.region-north header p, 
+.region-central header p, 
+.region-northeast header p, 
+.region-south header p {
+    color: #fff;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* ปรับ Footer ของหน้าย่อยให้ดูดีบนพื้นหลังรูปภาพ */
+.region-north footer, 
+.region-central footer, 
+.region-northeast footer, 
+.region-south footer {
+    background-color: rgba(44, 62, 80, 0.7); /* พื้นหลัง Footer โปร่งแสง */
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.region-north footer .copyright, 
+.region-central footer .copyright, 
+.region-northeast footer .copyright, 
+.region-south footer .copyright {
+    color: #fff;
+    text-shadow: none;
+}
