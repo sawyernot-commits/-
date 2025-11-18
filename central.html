@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>วัดสวยภาคกลาง</title>
-    <link rel="stylesheet" href="Index.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body class="region-central"> <header>
     <header style="background: linear-gradient(135deg, #2c3e50, #c0392b);">
@@ -99,4 +99,5 @@
     <div id="templeModal" class="modal"><div class="modal-content"><span class="close-btn" onclick="closeModal()">&times;</span><img id="m-img" src="" class="modal-img-full"><div class="modal-body"><h2 id="m-title"></h2><span class="info-badge">🕒 <span id="m-time"></span></span><p id="m-desc" style="line-height: 1.6; margin-top:15px;"></p><a id="m-map" href="#" target="_blank" class="btn-map"> นำทาง (Google Maps)</a></div></div></div>
     <script>function openModal(t, i, d, time, m) {document.getElementById("m-title").innerText = t;document.getElementById("m-img").src = i;document.getElementById("m-desc").innerText = d;document.getElementById("m-time").innerText = time;document.getElementById("m-map").href = m;document.getElementById("templeModal").style.display = "block";}function closeModal() { document.getElementById("templeModal").style.display = "none"; }window.onclick = function(e) { if(e.target == document.getElementById("templeModal")) closeModal(); }</script>
 </body>
+
 </html>
